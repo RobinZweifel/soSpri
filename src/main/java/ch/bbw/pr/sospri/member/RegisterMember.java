@@ -12,13 +12,13 @@ import javax.validation.constraints.Pattern;
  */
 public class RegisterMember {
 
-	@Length(min = 2, max = 20, message = "◦ Vorname ist unpassend \n")
+	@Length(min = 2, max = 20, message = "◦ Vorname ist unpassend")
 	private String prename;
 
-	@Length(min = 2, max = 20, message = "◦ Nachname ist unpassend \n")
+	@Length(min = 2, max = 20, message = "◦ Nachname ist unpassend")
 	private String lastname;
 
-	@Pattern(regexp = "^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{8,}$", message = "◦ Passwort nicht sicher genug")
+	@Pattern(regexp = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[a-zA-Z\\d]{8,}$", message = "◦ Passwort nicht sicher genug (Min 8 Zeichen,Gross- und Kleinbuchstaben und Zahlen)")
 	private String password;
 	private String confirmation;
 	
