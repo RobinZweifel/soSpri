@@ -7,6 +7,7 @@ import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 /**
@@ -32,6 +33,7 @@ public class Member {
 	private String lastname;
 
 	private String password;
+
 	private String username;
 	
 	private String authority;

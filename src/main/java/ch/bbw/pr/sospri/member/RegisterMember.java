@@ -1,4 +1,9 @@
 package ch.bbw.pr.sospri.member;
+
+import org.hibernate.validator.constraints.Length;
+
+import javax.validation.constraints.Pattern;
+
 /**
  * To regist a new Member
  *
@@ -6,8 +11,14 @@ package ch.bbw.pr.sospri.member;
  * @version 31.5.2022
  */
 public class RegisterMember {
+
+	@Length(min = 2, max = 20, message = "◦ Vorname ist unpassend \n")
 	private String prename;
+
+	@Length(min = 2, max = 20, message = "◦ Nachname ist unpassend \n")
 	private String lastname;
+
+	@Pattern(regexp = "^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{8,}$", message = "◦ Passwort nicht sicher genug")
 	private String password;
 	private String confirmation;
 	

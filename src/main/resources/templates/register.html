@@ -56,8 +56,7 @@
                       </div>
                       <div class="col-md-6">
                         <div class="form-group">
-                          <label for="form_confirmation">Passwort
-                            confirmation *</label> <input id="form_confirmation" type="password" name="confirmation" class="form-control" placeholder="Please enter your password*" required="required" data-error="Valid confirmation is required."
+                          <label for="form_confirmation">Passwort confirmation *</label> <input id="form_confirmation" type="password" name="confirmation" class="form-control" placeholder="Please enter your password*" required="required" data-error="Valid confirmation is required."
                             th:field="*{confirmation}">
                           <div class="help-block with-errors"></div>
                         </div>
@@ -72,13 +71,16 @@
                     <div class="row">
                       <div class="col-md-12">
                       
-                        <!-- Fehlermeldungen... 
-                        <b th:if="${#fields.hasErrors('prename')}" th:errors="*{prename}">Prename Error</b> 
-                        ---  hier eränzen
-                        
+                        <b th:if="${#fields.hasErrors('prename')}" th:errors="*{prename}">Prename Error</b>
+                        <br>
+                        <b th:if="${#fields.hasErrors('lastname')}" th:errors="*{lastname}">Lastname Error</b>
+                        <br>
+                        <b th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Password Error</b>
+
+                        <!--
                         <b th:text="*{message}"></b>
+
                          -->
-                         
                       </div>
                     </div> 
                   </div>
