@@ -76,11 +76,13 @@
                         <b th:if="${#fields.hasErrors('lastname')}" th:errors="*{lastname}">Lastname Error</b>
                         <br>
                         <b th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Password Error</b>
+                        <br>
+                        <b th:if="${#fields.hasErrors('confirmation')}" th:errors="*{confirmation}">Confirmation Error</b>
 
                         <!--
                         <b th:text="*{message}"></b>
+                        -->
 
-                         -->
                       </div>
                     </div> 
                   </div>
@@ -93,7 +95,6 @@
       </div>
     </div>
   </section>
-
   <div id="includedFooter"></div>
 </body>
 

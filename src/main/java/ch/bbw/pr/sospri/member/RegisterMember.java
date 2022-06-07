@@ -2,6 +2,7 @@ package ch.bbw.pr.sospri.member;
 
 import org.hibernate.validator.constraints.Length;
 
+import javax.persistence.Transient;
 import javax.validation.constraints.Pattern;
 
 /**
@@ -20,32 +21,42 @@ public class RegisterMember {
 
 	@Pattern(regexp = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[a-zA-Z\\d]{8,}$", message = "◦ Passwort nicht sicher genug (Min 8 Zeichen,Gross- und Kleinbuchstaben und Zahlen)")
 	private String password;
+
+	@Transient
 	private String confirmation;
 	
 	public String getPrename() {
 		return prename;
 	}
+
 	public void setPrename(String prename) {
 		this.prename = prename;
 	}
+
 	public String getLastname() {
 		return lastname;
 	}
+
 	public void setLastname(String lastname) {
 		this.lastname = lastname;
 	}
+
 	public String getPassword() {
 		return password;
 	}
+
 	public void setPassword(String password) {
 		this.password = password;
 	}
+
 	public String getConfirmation() {
 		return confirmation;
 	}
+
 	public void setConfirmation(String confirmation) {
 		this.confirmation = confirmation;
 	}
+
 	@Override
 	public String toString() {
 		return "RegisterMember [prename=" + prename + ", lastname=" + lastname + ", password=" + password
