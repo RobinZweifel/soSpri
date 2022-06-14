@@ -41,6 +41,15 @@ public class RegisterController {
 			return "register";
 		}
 
+		if(memberservice.getByUserName(registerMember.getPrename().toLowerCase()
+				+"."+registerMember.getLastname().toLowerCase()) != null) {
+			System.out.println("User allready exists, choose other first- or lastname.");
+
+			registerMember.setMessage("Username " + registerMember.getPrename().toLowerCase() + "." + registerMember.getLastname().toLowerCase() + " allready exists");
+
+			return "register";
+		}
+
 		Member newMember = new Member();
 		newMember.setPrename(registerMember.getPrename());
 		newMember.setLastname(registerMember.getLastname());
@@ -48,7 +57,10 @@ public class RegisterController {
 		newMember.setPassword(registerMember.getPassword());
 
 		memberservice.add(newMember);
-
 		return "registerconfirmed";
+	}
+
+	public String hash(){
+		return null;
 	}
 }

@@ -62,7 +62,6 @@ public class Member {
 		this.lastname = lastname;
 	}
 	
-	
 	public String getPassword() {
 		return password;
 	}

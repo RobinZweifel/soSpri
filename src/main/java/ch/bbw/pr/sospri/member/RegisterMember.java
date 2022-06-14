@@ -24,7 +24,17 @@ public class RegisterMember {
 
 	@Transient
 	private String confirmation;
-	
+
+	private String message;
+
+	public String getMessage() {
+		return message;
+	}
+
+	public void setMessage(String message) {
+		this.message = message;
+	}
+
 	public String getPrename() {
 		return prename;
 	}
