@@ -43,6 +43,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 //restricted access
                 .antMatchers("/get-channel").hasAnyRole("user","admin", "supervisor")
                 .antMatchers("/get-members").hasRole("admin")
+                .antMatchers("/edit-member").hasRole("admin")
                 .anyRequest().authenticated()
 
                 //Login and Logout
