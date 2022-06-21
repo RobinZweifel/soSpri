@@ -14,6 +14,15 @@
       $("#includedHeader").load("fragments/header.html");
       $("#includedFooter").load("fragments/footer.html");
     });
+
+    function showPassword() {
+      var x = document.getElementById("form_password");
+      if (x.type === "password") {
+        x.type = "text";
+      } else {
+        x.type = "password";
+      }
+    }
   </script>
 </head>
 
@@ -54,6 +63,7 @@
                           <div class="help-block with-errors"></div>
                         </div>
                       </div>
+
                       <div class="col-md-6">
                         <div class="form-group">
                           <label for="form_confirmation">Passwort confirmation *</label> <input id="form_confirmation" type="password" name="confirmation" class="form-control" placeholder="Please enter your password*" required="required" data-error="Valid confirmation is required."
@@ -62,6 +72,8 @@
                         </div>
                       </div>
                     </div>
+
+                    <input type="checkbox" onclick="showPassword()">Show Password
 
                     <select class="btn btn-secondary dropdown-toggle" style="margin: 1em;" th:field="*{authority}">
                       <option th:value="'member'" th:text="member"></option>
