@@ -63,6 +63,12 @@
                       </div>
                     </div>
 
+                    <select class="btn btn-secondary dropdown-toggle" style="margin: 1em;" th:field="*{authority}">
+                      <option th:value="'member'" th:text="member"></option>
+                      <option th:value="'admin'" th:text="admin"></option>
+                      <option th:value="'Supervisor'" th:text="supervisor"></option>
+                    </select>
+
                     <ul>
                       <li>Minimum 8 characters</li>
                       <li>At least one capital letter</li>

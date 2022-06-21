@@ -20,6 +20,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     public void globalSecurityConfiguration(AuthenticationManagerBuilder auth) throws Exception {
         auth.inMemoryAuthentication().withUser("user").password("{noop}1234").roles("user");
+        auth.inMemoryAuthentication().withUser("supervisor").password("{noop}1234").roles("user", "supervisor");
         auth.inMemoryAuthentication().withUser("admin").password("{noop}5678").roles("user", "admin");
     }
 
@@ -40,9 +41,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/get-register").permitAll()
 
                 //restricted access
-                .antMatchers("/get-channel").hasRole("user")
+                .antMatchers("/get-channel").hasAnyRole("user","admin", "supervisor")
                 .antMatchers("/get-members").hasRole("admin")
-                .antMatchers("/get-members").hasAuthority("admin")
                 .anyRequest().authenticated()
 
                 //Login and Logout

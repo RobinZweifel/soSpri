@@ -3,6 +3,9 @@ package ch.bbw.pr.sospri.member;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.Objects;
+
 /**
  * MemberService
  * 
@@ -37,7 +40,7 @@ public class MemberService{
 		Iterable<Member> memberitr = repository.findAll();
 		
 		for(Member member: memberitr){
-			if (member.getId() == id) {
+			if (Objects.equals(member.getId(), id)) {
 				return member;
 			}
 		}

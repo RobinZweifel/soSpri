@@ -68,6 +68,7 @@ public class RegisterController {
 		newMember.setUsername(registerMember.getPrename().toLowerCase() + "." + registerMember.getLastname().toLowerCase());
 		newMember.setPassword(registerMember.getPassword());
 		newMember.setPassword(encodedPassword);
+		newMember.setAuthority(registerMember.getAuthority());
 
 		memberservice.add(newMember);
 		return "registerconfirmed";
