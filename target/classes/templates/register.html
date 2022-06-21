@@ -73,7 +73,10 @@
                       </div>
                     </div>
 
-                    <input type="checkbox" onclick="showPassword()">Show Password
+                    <label>
+                      <input type="checkbox" onclick="showPassword()">
+                      Show Password
+                    </label>
 
                     <select class="btn btn-secondary dropdown-toggle" style="margin: 1em;" th:field="*{authority}">
                       <option th:value="'member'" th:text="member"></option>

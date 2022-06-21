@@ -49,7 +49,7 @@ public class ChannelsController {
 			model.addAttribute("messages", messageservice.getAll());
 			return "channel";
 		}
-		// Hack solange es kein authenticated member hat
+
 		message.setAuthor(authentication.getName());
 		message.setOrigin(new Date());
 		System.out.println("message: " + message);
