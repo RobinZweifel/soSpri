@@ -1,8 +1,14 @@
 package ch.bbw.pr.sospri.member;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.Objects;
+
 /**
  * MemberService
  * 
@@ -12,7 +18,7 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Service
 @Transactional
-public class MemberService{
+public class MemberService {
 	@Autowired
 	private MemberRepository repository;
 	
@@ -25,7 +31,6 @@ public class MemberService{
 	}
 
 	public void update(Long id, Member member) {
-		//save geht auch für update.
 		repository.save(member);
 	}
 
@@ -37,7 +42,7 @@ public class MemberService{
 		Iterable<Member> memberitr = repository.findAll();
 		
 		for(Member member: memberitr){
-			if (member.getId() == id) {
+			if (Objects.equals(member.getId(), id)) {
 				return member;
 			}
 		}

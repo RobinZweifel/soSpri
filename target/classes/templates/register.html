@@ -14,6 +14,15 @@
       $("#includedHeader").load("fragments/header.html");
       $("#includedFooter").load("fragments/footer.html");
     });
+
+    function showPassword() {
+      var x = document.getElementById("form_password");
+      if (x.type === "password") {
+        x.type = "text";
+      } else {
+        x.type = "password";
+      }
+    }
   </script>
 </head>
 
@@ -54,15 +63,34 @@
                           <div class="help-block with-errors"></div>
                         </div>
                       </div>
+
                       <div class="col-md-6">
                         <div class="form-group">
-                          <label for="form_confirmation">Passwort
-                            confirmation *</label> <input id="form_confirmation" type="password" name="confirmation" class="form-control" placeholder="Please enter your password*" required="required" data-error="Valid confirmation is required."
+                          <label for="form_confirmation">Passwort confirmation *</label> <input id="form_confirmation" type="password" name="confirmation" class="form-control" placeholder="Please enter your password*" required="required" data-error="Valid confirmation is required."
                             th:field="*{confirmation}">
                           <div class="help-block with-errors"></div>
                         </div>
                       </div>
                     </div>
+
+                    <label>
+                      <input type="checkbox" onclick="showPassword()">
+                      Show Password
+                    </label>
+
+                    <select class="btn btn-secondary dropdown-toggle" style="margin: 1em;" th:field="*{authority}">
+                      <option th:value="'member'" th:text="member"></option>
+                      <option th:value="'admin'" th:text="admin"></option>
+                      <option th:value="'Supervisor'" th:text="supervisor"></option>
+                    </select>
+
+                    <ul>
+                      <li>Minimum 8 characters</li>
+                      <li>At least one capital letter</li>
+                      <li>At least one lower case letter</li>
+                      <li>At least one number</li>
+                    </ul>
+
                     <div class="row">
                       <div class="col-md-12">
                         <input type="submit" class="btn btn-success btn-send" value="Register">
@@ -71,14 +99,21 @@
                     </div>
                     <div class="row">
                       <div class="col-md-12">
-                      
-                        <!-- Fehlermeldungen... 
-                        <b th:if="${#fields.hasErrors('prename')}" th:errors="*{prename}">Prename Error</b> 
-                        ---  hier eränzen
-                        
+
+                        <b th:text="*{message}"> </b>
+                        <br>
+                        <b th:if="${#fields.hasErrors('prename')}" th:errors="*{prename}">Prename Error</b>
+                        <br>
+                        <b th:if="${#fields.hasErrors('lastname')}" th:errors="*{lastname}">Lastname Error</b>
+                        <br>
+                        <b th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Password Error</b>
+                        <br>
+                        <b th:if="${#fields.hasErrors('confirmation')}" th:errors="*{confirmation}">Confirmation Error</b>
+
+                        <!--
                         <b th:text="*{message}"></b>
-                         -->
-                         
+                        -->
+
                       </div>
                     </div> 
                   </div>
@@ -91,7 +126,6 @@
       </div>
     </div>
   </section>
-
   <div id="includedFooter"></div>
 </body>
 

@@ -35,14 +35,14 @@
                       <div class="col-md-6">
                         <div class="form-group">
                           <label for="form_name">Firstname *</label>
-                          <input id="form_name" type="text" name="name" class="form-control" placeholder="Please enter your firstname *" required="required" data-error="Firstname is required." readonly="readonly" th:field="*{prename}">
+                          <input id="form_name" type="text" name="name" class="form-control" placeholder="Please enter your firstname *" required="required" data-error="Firstname is required."  th:field="*{prename}">
                           <div class="help-block with-errors"></div>
                         </div>
                       </div>
                       <div class="col-md-6">
                         <div class="form-group">
                           <label for="form_lastname">Lastname *</label>
-                          <input id="form_lastname" type="text" name="surname" class="form-control" placeholder="Please enter your lastname *" required="required" data-error="Lastname is required." readonly="readonly" th:field="*{lastname}">
+                          <input id="form_lastname" type="text" name="surname" class="form-control" placeholder="Please enter your lastname *" required="required" data-error="Lastname is required." th:field="*{lastname}">
                           <div class="help-block with-errors"></div>
                         </div>
                       </div>
@@ -51,7 +51,7 @@
                       <div class="col-md-6">
                         <div class="form-group">
                           <label for="form_authority">Authority *</label>
-                          <input id="form_authority" type="text" name="authority" class="form-control" placeholder="Please enter your authority *" required="required" data-error="Valid authority is required." th:field="*{authority}">
+                          <input type="text" name="authority" class="form-control" placeholder="Please enter your authority *" required="required" data-error="Valid authority is required." th:field="*{authority}">
                           <div class="help-block with-errors"></div>
                         </div>
                       </div>

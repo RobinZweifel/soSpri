@@ -22,7 +22,6 @@ public class MessageService {
 	}
 
 	public void update(Long id, Message message) {
-		//save geht auch für update.
 		repository.save(message);
 	}
 

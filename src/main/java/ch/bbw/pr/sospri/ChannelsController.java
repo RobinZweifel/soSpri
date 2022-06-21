@@ -5,6 +5,7 @@ import java.util.Date;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -41,20 +42,19 @@ public class ChannelsController {
 	}
 
 	@PostMapping("/add-message")
-	public String postRequestChannel(Model model, @ModelAttribute @Valid Message message, BindingResult bindingResult) {
+	public String postRequestChannel(Model model, @ModelAttribute Message message, BindingResult bindingResult, Authentication authentication) {
 		System.out.println("postRequestChannel(): message: " + message.toString());
 		if(bindingResult.hasErrors()) {
 			System.out.println("postRequestChannel(): has Error(s): " + bindingResult.getErrorCount());
 			model.addAttribute("messages", messageservice.getAll());
 			return "channel";
 		}
-		// Hack solange es kein authenticated member hat
-		Member tmpMember = memberservice.getById(4L);
-		message.setAuthor(tmpMember.getPrename() + " " + tmpMember.getLastname());
+
+		message.setAuthor(authentication.getName());
 		message.setOrigin(new Date());
 		System.out.println("message: " + message);
 		messageservice.add(message);
-		
+
 		return "redirect:/get-channel";
 	}
 }
