@@ -1,6 +1,8 @@
 package ch.bbw.pr.sospri;
 
 import ch.bbw.pr.sospri.member.Member;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -11,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import ch.bbw.pr.sospri.member.MemberService;
 import ch.bbw.pr.sospri.member.RegisterMember;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.validation.Valid;
 import java.security.SecureRandom;
@@ -27,34 +30,35 @@ public class RegisterController {
 	@Autowired
 	MemberService memberservice;
 
+	Logger logger = LoggerFactory.getLogger(RegisterController.class);
+
+	@Autowired
+	private ReCaptchaValidationService validator;
+
 	@GetMapping("/get-register")
 	public String getRequestRegistMembers(Model model) {
-		System.out.println("getRequestRegistMembers");
+		logger.info("getRequestRegistMembers");
 		model.addAttribute("registerMember", new RegisterMember());
 		return "register";
 	}
-	
+
 	@PostMapping("/get-register")
-	public String postRequestRegistMembers(@Valid RegisterMember registerMember, BindingResult result, Model model) {
-		System.out.println("postRequestRegistMembers: registerMember");
-		System.out.println(registerMember);
+	public String postRequestRegistMembers(@Valid RegisterMember registerMember, BindingResult result, Model model, @RequestParam(name="g-recaptcha-response") String captcha) {
+		logger.info("postRequestRegistMembers" + registerMember);
 
 		if(result.hasErrors()){
-			System.out.println("Error");
+			logger.error("postRequestRegistMembers has errors");
 			return "register";
 		}
 
-		if(memberservice.getByUserName(registerMember.getPrename().toLowerCase()
-				+"."+registerMember.getLastname().toLowerCase()) != null) {
-			System.out.println("User allready exists, choose other first- or lastname.");
-
+		if(memberservice.getByUserName(registerMember.getPrename().toLowerCase() +"."+registerMember.getLastname().toLowerCase()) != null) {
+			logger.error("postRequestRegistMembers user allready exists");
 			registerMember.setMessage("Username " + registerMember.getPrename().toLowerCase() + "." + registerMember.getLastname().toLowerCase() + " allready exists");
-
 			return "register";
 		}
 
 		if (!Objects.equals(registerMember.getPassword(), registerMember.getConfirmation())) {
-			registerMember.setMessage("Password confermation is incorrect");
+			logger.error("postRequestRegistMembers password and confirmation do not match");
 			return "register";
 		}
 
@@ -70,11 +74,18 @@ public class RegisterController {
 		newMember.setPassword(encodedPassword);
 		newMember.setAuthority(registerMember.getAuthority());
 
-		memberservice.add(newMember);
-		return "registerconfirmed";
-	}
+		if(validator.validateCaptcha(captcha))
+		{
+			memberservice.add(newMember);
+			model.addAttribute("employee", new RegisterMember());
+			logger.info("postRequestRegistMembers success");
+		}
+		else {
+			logger.error("postRequestRegistMembers captcha error");
+			registerMember.setCaptchaResponse("Please verify that you are not a robot");
+			return "register";
+		}
 
-	public String hash(){
-		return null;
+		return "registerconfirmed";
 	}
 }

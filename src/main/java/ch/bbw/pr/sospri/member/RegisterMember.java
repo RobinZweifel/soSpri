@@ -29,6 +29,16 @@ public class RegisterMember {
 
 	private String authority;
 
+	private String captchaResponse;
+
+	public String getCaptchaResponse() {
+		return captchaResponse;
+	}
+
+	public void setCaptchaResponse(String captchaResponse) {
+		this.captchaResponse = captchaResponse;
+	}
+
 	public String getAuthority() {
 		return authority;
 	}

@@ -26,13 +26,14 @@ public class MembersController {
 	
 	@GetMapping("/get-members")
 	public String getRequestMembers(Model model) {
-		System.out.println("getRequestMembers");
+		logger.info("getRequestMembers");
 		model.addAttribute("members", memberservice.getAll());
 		return "members";
 	}
 	
 	@GetMapping("/edit-member")
 	public String editMember(@RequestParam(name="id", required = true) long id, Model model) {
+		logger.info("editMember");
 		Member member = memberservice.getById(id);
 		System.out.println("editMember get: " + member);
 		model.addAttribute("member", member);
@@ -41,17 +42,16 @@ public class MembersController {
 
 	@PostMapping("/edit-member")
 	public String editMember(Member member, Model model) {
-		System.out.println("editMember post: edit member" + member);
+		logger.info("editMember post: edit member" + member);
 		Member value = memberservice.getById(member.getId());
 		value.setAuthority(member.getAuthority());
-		System.out.println("editMember post: update member" + value);
 		memberservice.update(member.getId(), value);
 		return "redirect:/get-members";
 	}
 
 	@GetMapping("/delete-member")
 	public String deleteMember(@RequestParam(name="id", required = true) long id, Model model) {
-		System.out.println("deleteMember: " + id);
+		logger.info("deleteMember " + id);
 		memberservice.deleteById(id);
 		return "redirect:/get-members";
 	}

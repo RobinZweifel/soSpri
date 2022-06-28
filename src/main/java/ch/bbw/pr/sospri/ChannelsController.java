@@ -4,6 +4,8 @@ import java.util.Date;
 
 import javax.validation.Valid;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
@@ -29,32 +31,31 @@ public class ChannelsController {
 	@Autowired
 	MemberService memberservice;
 
+	Logger logger = LoggerFactory.getLogger(ChannelsController.class);
+
 	@GetMapping("/get-channel")
 	public String getRequestChannel(Model model) {
-		System.out.println("getRequestChannel");
+		logger.info("getRequestChannel");
 		model.addAttribute("messages", messageservice.getAll());
 		
 		Message message = new Message();
 		message.setContent("Der zweite Pfeil trifft immer.");
-		System.out.println("message: " + message);
+		logger.info("getRequestChannel message: " + message);
 		model.addAttribute("message", message);
 		return "channel";
 	}
 
 	@PostMapping("/add-message")
 	public String postRequestChannel(Model model, @ModelAttribute Message message, BindingResult bindingResult, Authentication authentication) {
-		System.out.println("postRequestChannel(): message: " + message.toString());
+		logger.info("postRequestChannel: message: " + message.toString());
 		if(bindingResult.hasErrors()) {
-			System.out.println("postRequestChannel(): has Error(s): " + bindingResult.getErrorCount());
+			logger.error("postRequestChannel has errors" + bindingResult.getErrorCount());
 			model.addAttribute("messages", messageservice.getAll());
 			return "channel";
 		}
-
 		message.setAuthor(authentication.getName());
 		message.setOrigin(new Date());
-		System.out.println("message: " + message);
 		messageservice.add(message);
-
 		return "redirect:/get-channel";
 	}
 }

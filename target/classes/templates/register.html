@@ -24,6 +24,7 @@
       }
     }
   </script>
+  <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 </head>
 
 <body>
@@ -91,15 +92,21 @@
                       <li>At least one number</li>
                     </ul>
 
+                    <div class="g-recaptcha" data-sitekey="6LcF0KggAAAAAOLzLBwUGTLSmCzzG59_NUBovwa1"></div>
+                    <br>
+
                     <div class="row">
                       <div class="col-md-12">
                         <input type="submit" class="btn btn-success btn-send" value="Register">
                         <p></p>
                       </div>
                     </div>
+
                     <div class="row">
                       <div class="col-md-12">
 
+                        <b th:text="*{captchaResponse}"> </b>
+                        <br>
                         <b th:text="*{message}"> </b>
                         <br>
                         <b th:if="${#fields.hasErrors('prename')}" th:errors="*{prename}">Prename Error</b>
@@ -109,6 +116,7 @@
                         <b th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Password Error</b>
                         <br>
                         <b th:if="${#fields.hasErrors('confirmation')}" th:errors="*{confirmation}">Confirmation Error</b>
+
 
                         <!--
                         <b th:text="*{message}"></b>
