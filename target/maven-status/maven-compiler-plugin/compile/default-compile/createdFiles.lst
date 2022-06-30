@@ -1,0 +1,13 @@
+ch\bbw\pr\sospri\DefaultController.class
+ch\bbw\pr\sospri\ChannelsController.class
+ch\bbw\pr\sospri\Application.class
+ch\bbw\pr\sospri\message\Message.class
+ch\bbw\pr\sospri\member\RegisterMember.class
+ch\bbw\pr\sospri\member\MemberService.class
+ch\bbw\pr\sospri\message\MessageRepository.class
+ch\bbw\pr\sospri\RegisterController.class
+ch\bbw\pr\sospri\member\MemberRepository.class
+ch\bbw\pr\sospri\MembersController.class
+ch\bbw\pr\sospri\message\MessageService.class
+ch\bbw\pr\sospri\member\Member.class
+ch\bbw\pr\sospri\WebSecurityConfig.class

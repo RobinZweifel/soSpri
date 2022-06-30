@@ -1,0 +1,7 @@
+-------------------------------------------------------------------------------
+Test set: ch.bbw.pr.chat.ApplicationTests
+-------------------------------------------------------------------------------
+Tests run: 1, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 0.76 s <<< FAILURE! - in ch.bbw.pr.chat.ApplicationTests
+ch.bbw.pr.chat.ApplicationTests  Time elapsed: 0.756 s  <<< ERROR!
+java.lang.IllegalStateException: Unable to find a @SpringBootConfiguration, you need to use @ContextConfiguration or @SpringBootTest(classes=...) with your test
+

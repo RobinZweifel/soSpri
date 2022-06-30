@@ -5,6 +5,7 @@
   <title>SoSpri-the-page</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="google-signin-client_id" content="172866608059-omfbdl7s3ds7npboki3fh25t3n690j3n.apps.googleusercontent.com">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
   <link rel="stylesheet" href="css/pr_bbw.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
@@ -25,6 +26,7 @@
     }
   </script>
   <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+  <script src="https://apis.google.com/js/platform.js" async defer></script>
 </head>
 
 <body>
@@ -95,10 +97,12 @@
                     <div class="g-recaptcha" data-sitekey="6LcF0KggAAAAAOLzLBwUGTLSmCzzG59_NUBovwa1"></div>
                     <br>
 
+                    <div class="g-signin2" data-onsuccess="onSignIn"></div>
+                    <br>
+
                     <div class="row">
                       <div class="col-md-12">
                         <input type="submit" class="btn btn-success btn-send" value="Register">
-                        <p></p>
                       </div>
                     </div>
 
@@ -116,11 +120,6 @@
                         <b th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Password Error</b>
                         <br>
                         <b th:if="${#fields.hasErrors('confirmation')}" th:errors="*{confirmation}">Confirmation Error</b>
-
-
-                        <!--
-                        <b th:text="*{message}"></b>
-                        -->
 
                       </div>
                     </div> 
