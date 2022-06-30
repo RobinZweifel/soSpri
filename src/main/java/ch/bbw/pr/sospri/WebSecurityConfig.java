@@ -3,11 +3,14 @@ package ch.bbw.pr.sospri;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.oauth2.client.InMemoryOAuth2AuthorizedClientService;
+import org.springframework.security.oauth2.client.OAuth2AuthorizedClientService;
 
 @Configuration
 @EnableWebSecurity
@@ -42,25 +45,26 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/get-channel").hasAnyRole("user","admin", "supervisor")
                 .antMatchers("/get-members").hasRole("admin")
                 .antMatchers("/edit-member").hasRole("admin")
+                .antMatchers("/delete-member").hasRole("admin")
+                .antMatchers("/add-member").hasAnyRole("admin", "user", "supervisor")
                 .anyRequest().authenticated()
 
                 //Login and Logout
                 .and().formLogin()
                 .and().logout().permitAll()
-                .and().exceptionHandling().accessDeniedPage("/403.html");
+                .and().exceptionHandling().accessDeniedPage("/403.html")
+                .and().oauth2Login();
 
         http.csrf().ignoringAntMatchers("/h2-console/**").and().headers().frameOptions().sameOrigin();
 
     }
-
-    /*
+/*
     @Bean
-    public DaoAuthenticationProvider authenticationProvider(){
-        DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
-        provider.setPasswordEncoder(passwordEncoder);
-        provider.setUserDetailsService((UserDetailsService) memberService);
-        return provider;
+    public OAuth2AuthorizedClientService authorizedClientService() {
+
+        return new InMemoryOAuth2AuthorizedClientService(
+                clientRegistrationRepository());
     }
 
-     */
+ */
 }
