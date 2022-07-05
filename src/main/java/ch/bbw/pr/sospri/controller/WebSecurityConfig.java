@@ -40,10 +40,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
                 //restricted access
                 .antMatchers("/get-channel").hasAnyRole("user","admin", "supervisor")
+                .antMatchers("/get-channel").authenticated()
                 .antMatchers("/get-members").hasRole("admin")
                 .antMatchers("/edit-member").hasRole("admin")
-                .antMatchers("/delete-member").hasRole("admin")
+                .antMatchers("/delete-member").hasAnyRole("admin", "supervisor")
                 .antMatchers("/add-member").hasAnyRole("admin", "user", "supervisor")
+                .antMatchers("/add-member").authenticated()
                 .anyRequest().authenticated()
 
                 //Login and Logout
