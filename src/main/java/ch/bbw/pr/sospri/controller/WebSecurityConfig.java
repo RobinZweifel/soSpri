@@ -45,6 +45,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/edit-member").hasRole("admin")
                 .antMatchers("/delete-member").hasAnyRole("admin", "supervisor")
                 .antMatchers("/add-member").hasAnyRole("admin", "user", "supervisor")
+                .antMatchers("/add-message").authenticated()
                 .antMatchers("/add-member").authenticated()
                 .anyRequest().authenticated()
 

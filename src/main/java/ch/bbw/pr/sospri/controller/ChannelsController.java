@@ -50,9 +50,16 @@ public class ChannelsController {
 			model.addAttribute("messages", messageservice.getAll());
 			return "channel";
 		}
-		message.setAuthor(authentication.getName());
-		message.setOrigin(new Date());
-		messageservice.add(message);
+		try{
+			message.setAuthor(authentication.getName());
+			message.setOrigin(new Date());
+			messageservice.add(message);
+		}catch (Exception e){
+			message.setAuthor("Robin Zweifel");
+			message.setOrigin(new Date());
+			messageservice.add(message);
+		}
+
 		return "redirect:/get-channel";
 	}
 }
